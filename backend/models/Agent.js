@@ -49,7 +49,10 @@ const AgentSchema = new Schema({
         type: String,
         required: true
     },
-
+    sexe: {
+        type: String,
+        required: true
+    },
     fonction: {
         type: mongoose.Types.ObjectId,
         ref: 'Fonction'
@@ -57,6 +60,10 @@ const AgentSchema = new Schema({
     degrees: {
         type: [mongoose.Types.ObjectId],
         ref: "Degree"
+    },
+    contract: {
+        type: mongoose.Types.ObjectId,
+        ref: "Contract"
     }
 },
 {

@@ -1,6 +1,5 @@
 import Agent from "../models/Agent.js"
 
-// get agent list
 export const getAllAgent = async(req, res, next) => {
     try {
         const agents = await Agent.find();
@@ -10,7 +9,6 @@ export const getAllAgent = async(req, res, next) => {
     }
 }
 
-// get agent by this Id
 export const getAgent = async(req, res, next) => {
     const id = req.params.id;
     try {
@@ -21,9 +19,8 @@ export const getAgent = async(req, res, next) => {
     }
 }
 
-// add new agent
 export const addAgent = async(req, res, next)=> {
-    const { matricule,name, lastname, adress, dateOfBirth, cin,photo,familyStatus, nationality,email,phone } = req.body;
+    const { matricule,name, lastname, adress, dateOfBirth, cin,photo,familyStatus, nationality,email,phone, sexe} = req.body;
     // const photo = req.file.originalname;
     
     let existingCIN, existingEmail;
@@ -41,7 +38,7 @@ export const addAgent = async(req, res, next)=> {
        }
 
        const agent = new Agent({
-        matricule, name, lastname, adress, dateOfBirth, cin, photo,familyStatus, nationality,email,phone
+        matricule, name, lastname, adress, dateOfBirth, cin, photo,familyStatus, nationality,email,phone, sexe
        });
 
        await agent.save();
@@ -52,14 +49,13 @@ export const addAgent = async(req, res, next)=> {
     }
 }
 
-// update agent
 export const updateAgent = async(req, res, next) => {
     const id = req.params.id;
-    const { matricule,name, lastname, adress, dateOfBirth, cin, familyStatus, nationality, email, phone } = req.body;
+    const { matricule,name, lastname, adress, dateOfBirth, cin, familyStatus, nationality, email, phone, sexe } = req.body;
 
     try {
        const agent = await Agent.findByIdAndUpdate(id,{
-        matricule,name, lastname, adress, dateOfBirth, cin, familyStatus, nationality, email, phone
+        matricule,name, lastname, adress, dateOfBirth, cin, familyStatus, nationality, email, phone, sexe
        });
        await agent.save();
 
@@ -70,7 +66,6 @@ export const updateAgent = async(req, res, next) => {
     }
 }
 
-// remove agent
 export const removeAgent = async(req, res, next) => {
     const id = req.params.id;
     try {
