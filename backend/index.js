@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 
 // Routes import
 import AgentRoutes from "./routes/AgentRoutes.js";
+import FunctionRoutes from "./routes/FunctionRoutes.js";
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ mongoose.connect(MONGO_URI)
 
 // routes
 app.use("/api/agent", AgentRoutes);
+app.use("/api/fonction", FunctionRoutes);
 
 // launch server
 app.listen(PORT, ()=> console.log(`server running on port: ${PORT}`));

@@ -4,7 +4,6 @@ import Agent from "../models/Agent.js"
 export const getAllAgent = async(req, res, next) => {
     try {
         const agents = await Agent.find();
-        console.log(agents);
         return res.status(200).json(agents);
     } catch (error) {
         return res.status(500).json({message : 'Unable to get agent list'});
@@ -24,7 +23,7 @@ export const getAgent = async(req, res, next) => {
 
 // add new agent
 export const addAgent = async(req, res, next)=> {
-    const { name, lastname, adress, dateOfBirth, cin,photo,familyStatus, nationality,email,phone } = req.body;
+    const { matricule,name, lastname, adress, dateOfBirth, cin,photo,familyStatus, nationality,email,phone } = req.body;
     // const photo = req.file.originalname;
     
     let existingCIN, existingEmail;
@@ -42,25 +41,25 @@ export const addAgent = async(req, res, next)=> {
        }
 
        const agent = new Agent({
-        name, lastname, adress, dateOfBirth, cin, photo,familyStatus, nationality,email,phone
+        matricule, name, lastname, adress, dateOfBirth, cin, photo,familyStatus, nationality,email,phone
        });
 
        await agent.save();
        return res.status(201).json(agent);
 
     } catch (error) {
-        return res.status(500).json({ message: "Unable to add new agent"});
+        return res.status(500).json({ message: `Unable to create new Agent. ERROR: ${error}`});
     }
 }
 
 // update agent
 export const updateAgent = async(req, res, next) => {
     const id = req.params.id;
-    const { name, lastname, adress, dateOfBirth, cin, familyStatus, nationality, email, phone } = req.body;
+    const { matricule,name, lastname, adress, dateOfBirth, cin, familyStatus, nationality, email, phone } = req.body;
 
     try {
        const agent = await Agent.findByIdAndUpdate(id,{
-        name, lastname, adress, dateOfBirth, cin, familyStatus, nationality, email, phone
+        matricule,name, lastname, adress, dateOfBirth, cin, familyStatus, nationality, email, phone
        });
        await agent.save();
 

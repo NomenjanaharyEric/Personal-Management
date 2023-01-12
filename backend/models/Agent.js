@@ -3,6 +3,11 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const AgentSchema = new Schema({
+    matricule: {
+        type: String,
+        required: true,
+        unique: true
+    }, 
     name: {
         type: String,
         required: true,
@@ -44,6 +49,11 @@ const AgentSchema = new Schema({
         type: String,
         required: true
     },
+
+    fonction: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Fonction'
+    }
 },
 {
     timestamps: true
