@@ -53,6 +53,10 @@ const AgentSchema = new Schema({
     fonction: {
         type: mongoose.Types.ObjectId,
         ref: 'Fonction'
+    },
+    degrees: {
+        type: [mongoose.Types.ObjectId],
+        ref: "Degree"
     }
 },
 {

@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 // Routes import
 import AgentRoutes from "./routes/AgentRoutes.js";
 import FunctionRoutes from "./routes/FunctionRoutes.js";
+import DegreeRoutes from "./routes/DegreeRoutes.js";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ mongoose.connect(MONGO_URI)
 // routes
 app.use("/api/agent", AgentRoutes);
 app.use("/api/fonction", FunctionRoutes);
+app.use("/api/diplome", DegreeRoutes);
 
 // launch server
 app.listen(PORT, ()=> console.log(`server running on port: ${PORT}`));
