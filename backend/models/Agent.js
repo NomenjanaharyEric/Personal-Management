@@ -72,6 +72,10 @@ const AgentSchema = new Schema({
     absences: {
         type: [mongoose.Types.ObjectId],
         ref: "Absence"
+    },
+    payments: {
+        type: [mongoose.Types.ObjectId],
+        ref: "Payment"
     }
 },
 {
