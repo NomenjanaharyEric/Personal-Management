@@ -11,6 +11,7 @@ import DegreeRoutes from "./routes/DegreeRoutes.js";
 import ContractRoutes from "./routes/ContractRoutes.js";
 import MissionRoutes from "./routes/MissionRoutes.js";
 import AbsenceRoutes from "./routes/AbsenceRoutes.js";
+import PaymentRoutes from "./routes/PaymentRoutes.js";
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use("/api/diplome", DegreeRoutes);
 app.use("/api/contrat", ContractRoutes);
 app.use("/api/mission", MissionRoutes);
 app.use("/api/absence", AbsenceRoutes);
+app.use("/api/payment", PaymentRoutes);
 
 // launch server
 app.listen(PORT, ()=> console.log(`server running on port: ${PORT}`));

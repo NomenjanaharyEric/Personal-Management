@@ -68,6 +68,10 @@ const AgentSchema = new Schema({
     missions: {
         type: [mongoose.Types.ObjectId],
         ref: "Mission"
+    },
+    absences: {
+        type: [mongoose.Types.ObjectId],
+        ref: "Absence"
     }
 },
 {
