@@ -64,6 +64,10 @@ const AgentSchema = new Schema({
     contract: {
         type: mongoose.Types.ObjectId,
         ref: "Contract"
+    },
+    missions: {
+        type: [mongoose.Types.ObjectId],
+        ref: "Mission"
     }
 },
 {

@@ -11,7 +11,6 @@ const FunctionSchema = new Schema({
         type: Number,
         required: true
     },
-    
     agents: {
         type: [mongoose.Types.ObjectId],
         ref: 'Agent'
