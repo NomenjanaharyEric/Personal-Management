@@ -15,7 +15,7 @@ const contractSchema = new Schema({
         type: String,
         required: true
     },
-    dateEndig: {
+    dateEnding: {
         type: String,
         required: true
     },

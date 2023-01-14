@@ -1,3 +1,4 @@
+import Agent from "../models/Agent.js";
 import Payment from "../models/Payment.js"
 
 export const getPayments = async(req, res, next) => {
@@ -32,6 +33,11 @@ export const createPayment = async(req, res, next) => {
             datePayment, agent, isPayd   
         });
         await payment.save();
+
+        const agentToPay = await Agent.findById(agent);
+        agentToPay.payments.push(payment);
+        await agentToPay.save();
+
         return res.status(201).json(payment);
     } catch (error) {
         return res.status(500).json({
@@ -61,6 +67,12 @@ export const updatePayment = async(req, res, next) => {
 export const deletePayment = async(req, res, next) => {
     const id = req.params.id;
     try {
+        const payment = await Payment.findById(id);
+        const agent = await Agent.findById(payment.agent);
+
+        agent.payments.pull(payment);
+        await agent.save();
+
         await Payment.findByIdAndRemove(id);
         return res.status(200).json({
             message: `Payment deleted successfully`

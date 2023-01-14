@@ -9,10 +9,16 @@ export const createDegree = async(req, res, next) => {
             name, dateObtained, schoolName, description, owner
         });
         await degree.save();
+
+        const agent = await Agent.findById(owner);
+        agent.degrees.push(degree);
+        await agent.save();
+
         return res.status(201).json(degree);
     } catch (error) {
         return res.status(500).json({
-            message: `Unable to create new Degree`
+            message: `Unable to create new Degree.
+            Error: ${error}`
         })
     }
 }
@@ -43,7 +49,7 @@ export const getDegreeByAgent = async(req, res, next) => {
 export const getDegreeById = async(req, res, next) => {
     const id = req.params.id;
     try {
-        const degree = await Degree.findById(id);
+        const degree = await Degree.findById(id).populate("owner");
         return res.status(200).json(degree);
     } catch (error) {
         return res.status(500).json({
@@ -61,7 +67,9 @@ export const updateDegree = async(req, res, next) => {
             name, dateObtained, schoolName, description
         }) 
         await degree.save();
-        return res.status(202).json(degree);
+        return res.status(202).json({
+            message: `Degree updated with success`
+        });
     } catch (error) {
         return res.status(500).json({
             message: `Unable to update Degree by this ID. ERROR: ${error}`
@@ -72,6 +80,13 @@ export const updateDegree = async(req, res, next) => {
 export const deleteDegree = async(req, res, next) => {
     const id = req.params.id;
     try {
+        const degree = await Degree.findById(id);
+        const agent = await Agent.findById(degree.owner);
+
+        agent.degrees.pull(degree);
+
+        await agent.save();
+
         await Degree.findByIdAndRemove(id);
         return res.status(200).json({
             message: `Degree deleted successfully`

@@ -1,4 +1,5 @@
 import Absence from "../models/Absence.js"
+import Agent from "../models/Agent.js";
 
 export const getAbsences = async(req, res, next)=> {
     try {
@@ -32,6 +33,11 @@ export const createAbsence = async(req, res, next) => {
             dateBegin, dateEnding, justification, owner
         });
         await absence.save();
+
+        const agent = await Agent.findById(owner);
+        agent.absences.push(absence);
+        await agent.save();
+
         return res.status(201).json(absence);
     } catch (error) {
         return res.status(500).json({
@@ -61,6 +67,12 @@ export const updateAbsence = async(req, res, next) => {
 export const deleteAbsence = async(req, res, next) => {
     const id = req.params.id;
     try {
+        const absence = await Absence.findById(id);
+        const agent = await Agent.findById(absence.owner);
+
+        agent.absences.pull(absence);
+        await agent.save();
+
         await Absence.findByIdAndRemove(id);
         return res.status(200).json({
             message: `Absence deleted Successfully`

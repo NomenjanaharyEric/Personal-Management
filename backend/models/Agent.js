@@ -62,7 +62,7 @@ const AgentSchema = new Schema({
         ref: "Degree"
     },
     contract: {
-        type: mongoose.Types.ObjectId,
+        type: [mongoose.Types.ObjectId],
         ref: "Contract"
     },
     missions: {

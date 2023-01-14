@@ -1,3 +1,4 @@
+import Agent from "../models/Agent.js";
 import Mission from "../models/Mission.js"
 
 export const getMissions = async(req, res, next) => {
@@ -31,6 +32,10 @@ export const createMission = async(req, res, next) => {
         const mission = new Mission({
             name, dateBegin, dateEnding, owner
         });
+        // update agent
+        const agent = await Agent.findById(owner);
+        agent.missions.push(mission);
+        await agent.save();
         return res.status(201).json(mission);
     } catch (error) {
         return res.status(500).json({
@@ -58,6 +63,12 @@ export const updateMission = async(req, res, next) => {
 export const deleteMission = async(req, res, next) => {
     const id = req.params.id;
     try {
+        const mission = await Mission.findById(id);
+        const agent = await Agent.findById(mission.owner);
+
+        agent.missions.pull(mission);
+        await agent.save();
+
         await Mission.findByIdAndRemove(id);
         return res.status(200).json({
             message: `Mission deleted successfully`

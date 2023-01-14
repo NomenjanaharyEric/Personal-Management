@@ -63,13 +63,22 @@ export const updateFunction = async(req, res, next) => {
         await fonction.save();
         return res.status(202).json(fonction);
     } catch (error) {
-        return res.status(500).json({ message: "Unable to update Function by this Id" });
+        return res.status(500).json({ message: `Unable to update Function by this Id. Error: ${error}` });
     }
 }
 
 export const deleteFunction = async(req, res, next) => {
     const id = req.params.id;
     try {
+        const fonction = await Function.findById(id);
+        const agents = fonction.agents;
+
+        agents.map(async (agent) => {
+            const agentToUpdate = await Agent.findById(agent);
+            agentToUpdate.fonction = null;
+            await agentToUpdate.save();
+        })
+
         await Function.findByIdAndRemove(id);
         return res.status(200).json({ message: "Function deleted successfully"});
     } catch (error) {

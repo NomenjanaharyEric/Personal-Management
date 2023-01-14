@@ -32,9 +32,9 @@ mongoose.connect(MONGO_URI)
 
 // routes
 app.use("/api/agent", AgentRoutes);
-app.use("/api/fonction", FunctionRoutes);
-app.use("/api/diplome", DegreeRoutes);
-app.use("/api/contrat", ContractRoutes);
+app.use("/api/function", FunctionRoutes);
+app.use("/api/degree", DegreeRoutes);
+app.use("/api/contract", ContractRoutes);
 app.use("/api/mission", MissionRoutes);
 app.use("/api/absence", AbsenceRoutes);
 app.use("/api/payment", PaymentRoutes);

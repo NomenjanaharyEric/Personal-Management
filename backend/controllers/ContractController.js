@@ -1,3 +1,4 @@
+import Agent from "../models/Agent.js";
 import Contract from "../models/Contract.js";
 
 export const createContract = async(req, res, next) => {
@@ -7,6 +8,11 @@ export const createContract = async(req, res, next) => {
             name, description, dateBegin, dateEnding, owner
         });
         await contract.save();
+        
+        const agent = await Agent.findById(owner);
+        agent.contract.push(contract);
+        await agent.save();
+
         return res.status(201).json(contract);
     } catch (error) {
         return res.status(500).json({
@@ -60,6 +66,12 @@ export const updateContract = async(req, res, next) => {
 export const deleteContract = async(req, res, next) => {
     const id = req.params.id;
     try {
+        const contract = await Contract.findById(id);
+        const agent = await Agent.findById(contract.owner);
+
+        agent.contract.pull(contract);
+        await contract.save();
+
         await Contract.findByIdAndRemove(id);
         return res.status(200).json({
             message: `Contract deleted successfully`
