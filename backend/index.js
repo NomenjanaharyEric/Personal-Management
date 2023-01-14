@@ -12,6 +12,7 @@ import ContractRoutes from "./routes/ContractRoutes.js";
 import MissionRoutes from "./routes/MissionRoutes.js";
 import AbsenceRoutes from "./routes/AbsenceRoutes.js";
 import PaymentRoutes from "./routes/PaymentRoutes.js";
+import ServiceRoutes from "./routes/ServiceRoutes.js";
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ app.use("/api/contract", ContractRoutes);
 app.use("/api/mission", MissionRoutes);
 app.use("/api/absence", AbsenceRoutes);
 app.use("/api/payment", PaymentRoutes);
+app.use("/api/service", ServiceRoutes);
 
 // launch server
 app.listen(PORT, ()=> console.log(`server running on port: ${PORT}`));

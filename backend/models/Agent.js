@@ -76,6 +76,10 @@ const AgentSchema = new Schema({
     payments: {
         type: [mongoose.Types.ObjectId],
         ref: "Payment"
+    },
+    service: {
+        type: mongoose.Types.ObjectId,
+        ref: "Service"
     }
 },
 {
