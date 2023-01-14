@@ -21,7 +21,6 @@ export const getAgent = async(req, res, next) => {
 
 export const addAgent = async(req, res, next)=> {
     const { matricule,name, lastname, adress, dateOfBirth, cin,photo,familyStatus, nationality,email,phone, sexe} = req.body;
-    // const photo = req.file.originalname;
     
     let existingCIN, existingEmail;
 
