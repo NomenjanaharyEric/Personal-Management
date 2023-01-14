@@ -59,8 +59,13 @@ export const updateService = async(req,res,next) => {
 export const deleteService = async(req,res, next) => {
     const id = req.params.id;
     try {
-        // const service = await Service.findById(id);
-        // const agent = await Agent.findById();
+        const service = await Service.findById(id);
+        
+        service.agents.map(async(agentId) =>{
+            const agent = await Agent.findById(agentId);
+            agent.service = null;
+            await agent.save();
+        });
 
         await Service.findByIdAndRemove(id);
         return res.status(200).json({
