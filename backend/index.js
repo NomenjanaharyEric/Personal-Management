@@ -13,6 +13,7 @@ import MissionRoutes from "./routes/MissionRoutes.js";
 import AbsenceRoutes from "./routes/AbsenceRoutes.js";
 import PaymentRoutes from "./routes/PaymentRoutes.js";
 import ServiceRoutes from "./routes/ServiceRoutes.js";
+import DepartmentRoutes from "./routes/DepartmentRoutes.js";
 import UserRoutes from "./routes/UserRoutes.js";
 
 dotenv.config();
@@ -41,6 +42,7 @@ app.use("/api/mission", MissionRoutes);
 app.use("/api/absence", AbsenceRoutes);
 app.use("/api/payment", PaymentRoutes);
 app.use("/api/service", ServiceRoutes);
+app.use("/api/department", DepartmentRoutes);
 app.use("/api/user", UserRoutes);
 
 // launch server

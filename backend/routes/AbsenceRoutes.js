@@ -1,5 +1,5 @@
 import express from "express";
-import { createAbsence, deleteAbsence, getAbsence, getAbsences, updateAbsence } from "../controllers/AbsenceController";
+import { createAbsence, deleteAbsence, getAbsence, getAbsences, updateAbsence } from "../controllers/AbsenceController.js";
 
 const router = express.Router();
 

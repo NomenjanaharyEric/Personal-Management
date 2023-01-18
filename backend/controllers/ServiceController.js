@@ -1,5 +1,5 @@
-import Agent from "../models/Agent";
-import Service from "../models/Service"
+import Agent from "../models/Agent.js";
+import Service from "../models/Service.js"
 
 export const getServices = async(req, res, next) => {
     try {

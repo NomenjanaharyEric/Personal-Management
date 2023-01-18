@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", getAllAgent);
 router.get("/:id", getAgent);
-router.post("/",upload("photo"), addAgent);
+router.post("/",upload.single("photo"), addAgent);
 router.put("/:id", updateAgent);
 router.delete("/:id", removeAgent);
 
