@@ -1,6 +1,17 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 
+export const getUsers = async(req, res, next) => {
+    try {
+        const users = await User.find();
+        return res.status(200).json(users);
+    } catch (error) {
+        return res.status(200).json({
+            message: `Unable to get user list. Error: ${error}`
+        })
+    }
+}
+
 export const login = async(req,res,next) => {
     
     const { email, password } = req.body;
