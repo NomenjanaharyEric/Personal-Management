@@ -23,7 +23,9 @@ const Login = () => {
       navigate("/dashboard");
     },
     onError: (error) => {
-      console.log(error.message);
+      notification.error({
+        message: "Invalid login"
+      })
     }
   });
 
