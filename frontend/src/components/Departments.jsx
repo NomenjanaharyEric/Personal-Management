@@ -38,7 +38,7 @@ const Departments = () => {
       key: "services",
       render: (_, record) => (
         <Space>
-          <UpdateDepartment value={record.id}/>
+          {/* <UpdateDepartment/> */}
           <Button 
                 danger
                 value={record._id}

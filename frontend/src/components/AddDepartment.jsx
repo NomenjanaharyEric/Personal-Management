@@ -5,7 +5,7 @@ import departmentService from '../services/DepartmentServices';
 
 const AddDepartment = () => {
     const [name, setName] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [form] = Form.useForm();
 
     const queryClient = useQueryClient();
